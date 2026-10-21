@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-cinema: #101217;
+  --bg-charcoal: #17191F;
+  --surface-panel: #24272D;
+  --surface-elevated: #1E2127;
+  --text-white: #F5F4EF;
+  --text-muted: #A4A6AB;
+  --accent-lime: #D9FF43;
+  --accent-coral: #FF6548;
+  --border-subtle: #373A40;
+}
+
+/* RTL / LTR Font Overrides */
+html[dir="rtl"] {
+  font-family: 'Alexandria', 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html[dir="rtl"] .font-heading {
+  font-family: 'Alexandria', 'IBM Plex Sans Arabic', sans-serif;
+  letter-spacing: normal;
+}
+
+html[dir="rtl"] .font-body {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+html[dir="ltr"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html[dir="ltr"] .font-heading {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Subtle Film Grain Overlay */
+.film-grain {
+  background-image: radial-gradient(rgba(217, 255, 67, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #101217;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #24272D;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #373A40;
+}
+
+/* Cinematic Lines & Borders */
+.border-cinematic {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.border-cinematic-active {
+  border-color: rgba(217, 255, 67, 0.4);
+}
+
+/* Timecode & Monospace Numbers */
+.timecode {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+/* Glassmorphism restrained for sticky navbar */
+.nav-backdrop {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background-color: rgba(16, 18, 23, 0.85);
+}
+
+/* Focus visible styles for accessibility */
+*:focus-visible {
+  outline: 2px solid #D9FF43;
+  outline-offset: 2px;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
