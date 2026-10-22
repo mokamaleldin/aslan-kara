@@ -21,16 +21,6 @@ export function Home() {
           <p className="professional-title">{t.heroLine}</p>
         </div>
         <div className="profile-main">
-          <figure className="profile-photo">
-            <img
-              src="/images/profile/aslan-kara.webp"
-              alt={t.portraitAlt}
-              width="276"
-              height="276"
-              fetchPriority="high"
-            />
-            <figcaption>{t.portraitCaption}</figcaption>
-          </figure>
           <div className="profile-summary">
             <p className="profile-lead">{t.intro}</p>
             <p>{t.introDetail}</p>

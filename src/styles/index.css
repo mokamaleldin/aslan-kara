@@ -337,27 +337,12 @@ h2 {
 }
 .profile-main {
   display: grid;
-  grid-template-columns: 276px minmax(0, 1fr) 120px;
+  grid-template-columns: minmax(0, 1fr) 120px;
   gap: 46px;
   align-items: center;
 }
-.profile-photo img {
-  width: 276px;
-  aspect-ratio: 1.1;
-  height: auto;
-  object-fit: cover;
-  object-position: center 42%;
-  border-radius: 5px;
-  filter: grayscale(1);
-}
-.profile-photo figcaption {
-  font-size: 9px;
-  color: var(--muted);
-  margin-top: 9px;
-  line-height: 1.8;
-}
 .profile-summary {
-  max-width: 580px;
+  max-width: 760px;
 }
 .profile-summary .profile-lead {
   font-size: 18px;
@@ -1311,14 +1296,11 @@ html[dir="rtl"] .project-metadata dd[dir="ltr"] {
     width: calc(100% - 72px);
   }
   .profile-main {
-    grid-template-columns: 240px minmax(0, 1fr);
+    grid-template-columns: 1fr;
     gap: 36px;
   }
   .profile-side-note {
     display: none;
-  }
-  .profile-photo img {
-    width: 240px;
   }
   .profile-summary .profile-lead {
     font-size: 17px;
@@ -1408,16 +1390,9 @@ html[dir="rtl"] .project-metadata dd[dir="ltr"] {
     font-size: 22px;
   }
   .profile-main {
-    grid-template-columns: 160px minmax(0, 1fr);
+    grid-template-columns: 1fr;
     gap: 22px;
     align-items: start;
-  }
-  .profile-photo img {
-    width: 100%;
-    aspect-ratio: 0.85;
-  }
-  .profile-photo figcaption {
-    font-size: 8px;
   }
   .profile-summary .profile-lead {
     font-size: 14px;
@@ -1864,20 +1839,6 @@ html[dir="rtl"] .project-metadata dd[dir="ltr"] {
     grid-template-columns: 1fr;
     gap: 23px;
   }
-  .profile-photo {
-    display: grid;
-    grid-template-columns: 154px minmax(0, 1fr);
-    align-items: end;
-    gap: 20px;
-  }
-  .profile-photo img {
-    aspect-ratio: 1.12;
-  }
-  .profile-photo figcaption {
-    font-size: 10px;
-    max-width: 120px;
-    padding-bottom: 8px;
-  }
   .profile-summary .profile-lead {
     font-size: 16px;
     line-height: 2;
@@ -1921,13 +1882,6 @@ html[dir="rtl"] .project-metadata dd[dir="ltr"] {
 @media (max-width: 360px) {
   .container {
     width: calc(100% - 32px);
-  }
-  .profile-photo {
-    grid-template-columns: 142px minmax(0, 1fr);
-    gap: 17px;
-  }
-  .profile-photo figcaption {
-    font-size: 9px;
   }
   .professional-title {
     font-size: 20px;

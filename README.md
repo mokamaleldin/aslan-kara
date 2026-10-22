@@ -33,7 +33,7 @@ links preserve normal browser navigation and open-in-new-tab behavior.
   original source titles and runtimes.
 - `src/data/reports.ts`: report sources and publication dates.
 - `src/data/courses.ts`: the supplied training topics.
-- `public/images/`: authentic profile and portfolio images.
+- `public/images/`: authentic portfolio images.
 - `public/fonts/`: Cairo font subsets and OFL license.
 - `public/cv/`: the unchanged supplied CV PDFs.
 
@@ -54,10 +54,10 @@ training provider only.
 
 On 22 October 2026 the original YouTube playlist supplied all 17 video IDs,
 titles and runtimes. The public Behance profile supplied the four collection
-titles, covers, URLs and profile photograph. Behance collection detail media
+titles, covers and URLs. Behance collection detail media
 remain available at their original source; the site does not fabricate embeds.
-Podcast 28 uses its public channel identity. Original video thumbnails and the
-profile photograph are stored locally; only public metadata and media assets
+Podcast 28 uses its public channel identity. Original video thumbnails
+are stored locally; only public metadata and media assets
 were retained, without cookies or visitor information.
 
 Keep `public/sitemap.xml` synchronized when adding project IDs. The sitemap

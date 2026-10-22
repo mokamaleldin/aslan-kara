@@ -30,22 +30,33 @@ function Portfolio() {
       ? `${project.description[language]} ${project.role[language]}`
       : metadata.description;
     const canonical = `https://aslan-kara.vercel.app${routeHref(language, path)}`;
-    const image = `https://aslan-kara.vercel.app${project?.image || "/images/profile/aslan-kara.webp"}`;
     document.title = title;
     const tags = {
       'meta[name="description"]': description,
       'meta[property="og:title"]': title,
       'meta[property="og:description"]': description,
       'meta[property="og:url"]': canonical,
-      'meta[property="og:image"]': image,
       'meta[property="og:locale"]': language === "ar" ? "ar_AR" : "en_US",
       'meta[name="twitter:title"]': title,
       'meta[name="twitter:description"]': description,
-      'meta[name="twitter:image"]': image,
     };
     Object.entries(tags).forEach(([selector, content]) =>
       document.querySelector(selector)?.setAttribute("content", content),
     );
+    for (const [attribute, key] of [
+      ["property", "og:image"],
+      ["name", "twitter:image"],
+    ]) {
+      const existing = document.querySelector<HTMLMetaElement>(
+        `meta[${attribute}="${key}"]`,
+      );
+      if (project) {
+        const meta = existing || document.createElement("meta");
+        meta.setAttribute(attribute, key);
+        meta.content = `https://aslan-kara.vercel.app${project.image}`;
+        if (!existing) document.head.appendChild(meta);
+      } else existing?.remove();
+    }
     document
       .querySelector('link[rel="canonical"]')
       ?.setAttribute("href", canonical);
