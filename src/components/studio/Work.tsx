@@ -1,162 +1,145 @@
-import { useState } from "react";
-import { ArrowDown, ArrowUp, ArrowUpRight, Play } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Search, X } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 import {
-  links,
-  selectedWork,
-  type PortfolioWork,
+  projects,
+  categories,
   type WorkCategory,
+  links,
 } from "../../data/portfolio";
+import { ProjectCard } from "./ProjectCard";
 
-export function Work({ onPlay }: { onPlay: (film: PortfolioWork) => void }) {
+function normalized(text: string) {
+  return text
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u064B-\u065F\u0670\u0640]/g, "")
+    .replace(/[أإآ]/g, "ا")
+    .replace(/ى/g, "ي");
+}
+export function Work() {
   const { language, t } = useLanguage();
-  const [category, setCategory] = useState<WorkCategory | "all">("all");
-  const [expanded, setExpanded] = useState(false);
-  const filtered =
-    category === "all"
-      ? selectedWork
-      : selectedWork.filter((work) => work.category === category);
-  const visible =
-    category === "all" && !expanded ? filtered.slice(0, 4) : filtered;
-  const changeCategory = (next: WorkCategory | "all") => {
-    setCategory(next);
-    setExpanded(false);
-  };
-  const collapseWork = () => {
-    setExpanded(false);
-    document
-      .getElementById("work")
-      ?.scrollIntoView({ behavior: "instant", block: "start" });
-  };
-
+  const [category, setCategory] = useState<WorkCategory | "all">(() => {
+    const saved = new URLSearchParams(window.location.search).get("category");
+    return categories.includes(saved as WorkCategory)
+      ? (saved as WorkCategory)
+      : "all";
+  });
+  const [search, setSearch] = useState(
+    () => new URLSearchParams(window.location.search).get("q") || "",
+  );
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (category !== "all") url.searchParams.set("category", category);
+    else url.searchParams.delete("category");
+    if (search.trim()) url.searchParams.set("q", search.trim());
+    else url.searchParams.delete("q");
+    window.history.replaceState({}, "", url);
+  }, [category, search]);
+  const query = normalized(search.trim());
+  const filtered = projects.filter(
+    (work) =>
+      (category === "all" || work.category === category) &&
+      (!query ||
+        normalized(
+          `${work.title.ar} ${work.title.en} ${work.role.ar} ${work.role.en} ${t.filters[work.category]} ${work.source}`,
+        ).includes(query)),
+  );
+  const params = new URLSearchParams();
+  if (category !== "all") params.set("category", category);
+  if (search.trim()) params.set("q", search.trim());
   return (
-    <section
-      id="work"
-      className="work-section container section-space"
-      aria-labelledby="work-heading"
-    >
-      <p className="section-label">{t.workLabel}</p>
-      <div className="section-heading-row">
-        <h2 id="work-heading">{t.workHeading}</h2>
+    <section className="container work-page" aria-labelledby="work-heading">
+      <div className="page-intro">
+        <p className="section-label">{t.workLabel}</p>
+        <div className="work-page-title">
+          <h1 id="work-heading">{t.workHeading}</h1>
+          <span className="archive-number" dir="ltr">
+            {projects.length}
+            <span>{language === "ar" ? "الأعمال" : "PROJECTS"}</span>
+          </span>
+        </div>
         <p>{t.workIntro}</p>
       </div>
-      <div className="work-toolbar">
+      <div className="archive-toolbar">
         <div
-          className="work-filters"
+          className="archive-filters"
           role="group"
-          aria-label={language === "ar" ? "تصفية الأعمال" : "Filter work"}
+          aria-label={
+            language === "ar"
+              ? "تصفية الأعمال حسب النوع"
+              : "Filter projects by format"
+          }
         >
-          {(["all", "promos", "reports", "podcasts"] as const).map((filter) => (
+          {categories.map((filter) => (
             <button
               key={filter}
-              onClick={() => changeCategory(filter)}
+              onClick={() => setCategory(filter)}
               aria-pressed={category === filter}
             >
               {t.filters[filter]}
-              <span className="filter-dot" />
+              <span dir="ltr">
+                {filter === "all"
+                  ? projects.length
+                  : projects.filter((work) => work.category === filter).length}
+              </span>
             </button>
           ))}
         </div>
-        <span className="work-counter mono" dir="ltr" aria-live="polite">
-          {String(visible.length).padStart(2, "0")} /{" "}
-          {String(filtered.length).padStart(2, "0")}
-        </span>
+        <div className="archive-search">
+          <Search size={17} aria-hidden="true" />
+          <input
+            aria-label={t.search}
+            type="search"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder={t.searchPlaceholder}
+          />
+          {search && (
+            <button onClick={() => setSearch("")} aria-label={t.clearQuery}>
+              <X size={16} aria-hidden="true" />
+            </button>
+          )}
+        </div>
       </div>
-      <div className="work-grid" id="work-grid">
-        {visible.map((work) => (
-          <article key={work.id} className="work-card">
-            {work.youtubeId ? (
-              <button
-                className="work-media"
-                onClick={() => onPlay(work)}
-                aria-label={`${t.play}: ${work.title[language]}`}
-              >
-                <img
-                  src={work.image}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  width="1280"
-                  height="720"
-                />
-                <span className="work-source" dir="ltr">
-                  {work.source}
-                </span>
-                <span className="media-action">
-                  <Play size={18} fill="currentColor" aria-hidden="true" />
-                </span>
-              </button>
-            ) : (
-              <a
-                className="work-media"
-                href={work.url}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`${t.open}: ${work.title[language]}`}
-              >
-                <img
-                  src={work.image}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  width="1280"
-                  height="720"
-                />
-                <span className="work-source" dir="ltr">
-                  {work.source}
-                </span>
-                <span className="media-action">
-                  <ArrowUpRight size={22} aria-hidden="true" />
-                </span>
-              </a>
-            )}
-            <div className="work-caption">
-              <div>
-                <h3>{work.title[language]}</h3>
-                <p>{work.role[language]}</p>
-              </div>
-              <span className="work-category">
-                {work.category && t.filters[work.category]}
-              </span>
-            </div>
-          </article>
+      <p className="archive-results" role="status">
+        <bdi>{filtered.length}</bdi> {t.results}
+      </p>
+      <div className="project-grid archive-grid">
+        {filtered.map((work, i) => (
+          <ProjectCard
+            key={work.id}
+            work={work}
+            wide={i === 0 && !query && category === "all"}
+            search={params.toString()}
+          />
         ))}
       </div>
-      {category === "all" && (
-        <div className="more-work">
+      {!filtered.length && (
+        <div className="empty-results">
+          <p>{t.noResults}</p>
           <button
             className="button button-outline"
-            aria-expanded={expanded}
-            aria-controls="work-grid"
-            onClick={expanded ? collapseWork : () => setExpanded(true)}
+            onClick={() => {
+              setCategory("all");
+              setSearch("");
+            }}
           >
-            {expanded ? t.fewer : t.more}
-            {expanded ? (
-              <ArrowUp size={16} aria-hidden="true" />
-            ) : (
-              <ArrowDown size={16} aria-hidden="true" />
-            )}
+            {t.clearSearch}
           </button>
         </div>
       )}
-      <div className="portfolio-links">
-        <span>{t.browse}</span>
+      <div className="archive-sources">
+        <span>
+          {language === "ar"
+            ? "مصادر إضافية للأعمال"
+            : "Explore the source collections"}
+        </span>
         <a href={links.promos} target="_blank" rel="noreferrer">
-          {t.allPromos}
-          <ArrowUpRight size={15} aria-hidden="true" />
+          YouTube ↗
         </a>
-        <a href={links.behance} target="_blank" rel="noreferrer" lang="en">
-          Behance
-          <ArrowUpRight size={15} aria-hidden="true" />
-        </a>
-        <span className="podcast-links-label">{t.channels}</span>
-        <a href={links.podcast1} target="_blank" rel="noreferrer">
-          {t.channel1}
-          <ArrowUpRight size={15} aria-hidden="true" />
-        </a>
-        <a href={links.podcast2} target="_blank" rel="noreferrer">
-          {t.channel2}
-          <ArrowUpRight size={15} aria-hidden="true" />
+        <a href={links.behance} target="_blank" rel="noreferrer">
+          Behance ↗
         </a>
       </div>
     </section>
