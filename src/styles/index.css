@@ -1680,7 +1680,7 @@ html[dir="rtl"] .project-metadata dd[dir="ltr"] {
   .archive-filters button {
     padding: 7px 9px;
     font-size: 10px;
-    min-height: 39px;
+    min-height: 44px;
     gap: 6px;
   }
   .archive-filters button > span {

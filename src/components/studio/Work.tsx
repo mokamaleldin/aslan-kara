@@ -56,7 +56,7 @@ export function Work() {
           <h1 id="work-heading">{t.workHeading}</h1>
           <span className="archive-number" dir="ltr">
             {projects.length}
-            <span>PROJECTS</span>
+            <span>{language === "ar" ? "الأعمال" : "PROJECTS"}</span>
           </span>
         </div>
         <p>{t.workIntro}</p>
@@ -96,7 +96,7 @@ export function Work() {
             placeholder={t.searchPlaceholder}
           />
           {search && (
-            <button onClick={() => setSearch("")} aria-label={t.clearSearch}>
+            <button onClick={() => setSearch("")} aria-label={t.clearQuery}>
               <X size={16} aria-hidden="true" />
             </button>
           )}

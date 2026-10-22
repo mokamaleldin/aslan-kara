@@ -53,7 +53,9 @@ export function Experience() {
                 <span>—</span>
                 <bdi>{entry.to}</bdi>
               </p>
-              <h3><bdi>{entry.title}</bdi></h3>
+              <h3>
+                <bdi>{entry.title}</bdi>
+              </h3>
               <p className="career-role">{entry.role}</p>
               <p className="career-description">{entry.description}</p>
               {entry.achievement && (
