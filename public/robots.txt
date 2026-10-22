@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aslan-kara.vercel.app/sitemap.xml
+Sitemap: https://aslan-kara.com/sitemap.xml

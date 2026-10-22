@@ -29,7 +29,7 @@ function Portfolio() {
     const description = project
       ? `${project.description[language]} ${project.role[language]}`
       : metadata.description;
-    const canonical = `https://aslan-kara.vercel.app${routeHref(language, path)}`;
+    const canonical = `https://aslan-kara.com${routeHref(language, path)}`;
     document.title = title;
     const tags = {
       'meta[name="description"]': description,
@@ -53,7 +53,7 @@ function Portfolio() {
       if (project) {
         const meta = existing || document.createElement("meta");
         meta.setAttribute(attribute, key);
-        meta.content = `https://aslan-kara.vercel.app${project.image}`;
+        meta.content = `https://aslan-kara.com${project.image}`;
         if (!existing) document.head.appendChild(meta);
       } else existing?.remove();
     }
@@ -65,7 +65,7 @@ function Portfolio() {
         .querySelector(`link[hreflang="${locale}"]`)
         ?.setAttribute(
           "href",
-          `https://aslan-kara.vercel.app${routeHref(locale, path)}`,
+          `https://aslan-kara.com${routeHref(locale, path)}`,
         );
   }, [language, path, project, isWork, notFound, t]);
   return (
