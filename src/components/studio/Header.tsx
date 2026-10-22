@@ -1,15 +1,30 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
+import { getPagePath, routeHref } from "../../lib/routes";
 
 export function Header() {
   const { language, toggleLanguage, t } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
+  const path = getPagePath();
+  const nav = [
+    { title: t.nav.home, href: routeHref(language), active: path === "/" },
+    {
+      title: t.nav.work,
+      href: routeHref(language, "/work"),
+      active: path.startsWith("/work"),
+    },
+    {
+      title: t.nav.experience,
+      href: `${routeHref(language)}#experience`,
+      active: false,
+    },
+  ];
   useEffect(() => {
     if (!menuOpen) return;
-    const escape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+    const escape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
         setMenuOpen(false);
         menuButton.current?.focus();
       }
@@ -17,7 +32,6 @@ export function Header() {
     window.addEventListener("keydown", escape);
     return () => window.removeEventListener("keydown", escape);
   }, [menuOpen]);
-
   return (
     <>
       <a href="#main-content" className="skip-link">
@@ -25,12 +39,16 @@ export function Header() {
       </a>
       <header className="site-header">
         <div className="container header-inner">
-          <a className="wordmark" href="#home" aria-label={t.name}>
+          <a
+            className="wordmark"
+            href={routeHref(language)}
+            aria-label={t.name}
+          >
             <span className="brand-symbol" aria-hidden="true" dir="ltr">
-              a<span>/</span>k
+              a/k
             </span>
             <span className="brand-name" dir="ltr">
-              ASLAN KARA<span>VIDEO EDITOR</span>
+              ASLAN KARA<span>SENIOR VIDEO EDITOR</span>
             </span>
           </a>
           <nav
@@ -39,12 +57,15 @@ export function Header() {
               language === "ar" ? "التنقل الرئيسي" : "Main navigation"
             }
           >
-            <a href="#work">{t.nav.work}</a>
-            <a href="#about">{t.nav.about}</a>
-            <a href="#contact">
-              {t.nav.contact}
-              <ArrowUpRight size={14} aria-hidden="true" />
-            </a>
+            {nav.map((item) => (
+              <a
+                key={item.title}
+                href={item.href}
+                aria-current={item.active ? "page" : undefined}
+              >
+                {item.title}
+              </a>
+            ))}
           </nav>
           <div className="header-actions">
             <button
@@ -55,21 +76,25 @@ export function Header() {
                 language === "ar" ? "Switch to English" : "التبديل إلى العربية"
               }
             >
-              {language === "ar" ? "EN" : "عربي"}
+              {language === "ar" ? "EN" : "العربية"}
             </button>
-            <a className="header-cta" href="#contact">
+            <a className="header-cta" href={`${routeHref(language)}#contact`}>
               {t.nav.contact}
-              <ArrowUpRight size={16} aria-hidden="true" />
+              <ArrowUpRight size={15} aria-hidden="true" />
             </a>
             <button
-              ref={menuButton}
               className="menu-toggle"
-              onClick={() => setMenuOpen(!menuOpen)}
+              ref={menuButton}
+              onClick={() => setMenuOpen((v) => !v)}
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
               aria-label={menuOpen ? t.closeMenu : t.menu}
             >
-              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+              {menuOpen ? (
+                <X size={22} aria-hidden="true" />
+              ) : (
+                <Menu size={22} aria-hidden="true" />
+              )}
             </button>
           </div>
         </div>
@@ -77,19 +102,27 @@ export function Header() {
           id="mobile-nav"
           className="mobile-nav container"
           hidden={!menuOpen}
-          aria-label={
-            language === "ar" ? "قائمة الموبايل" : "Mobile navigation"
-          }
+          aria-label={language === "ar" ? "قائمة التنقل" : "Mobile navigation"}
         >
-          {(["work", "about", "contact"] as const).map((section, index) => (
+          {[
+            ...nav,
+            {
+              title: t.nav.contact,
+              href: `${routeHref(language)}#contact`,
+              active: false,
+            },
+          ].map((item, i) => (
             <a
-              key={section}
-              href={`#${section}`}
+              key={item.title}
+              href={item.href}
               onClick={() => setMenuOpen(false)}
+              aria-current={item.active ? "page" : undefined}
             >
-              <span className="mono">0{index + 1}</span>
-              {t.nav[section]}
-              <ArrowUpRight size={24} aria-hidden="true" />
+              <span className="mono" dir="ltr">
+                0{i + 1}
+              </span>
+              {item.title}
+              <ArrowUpRight size={22} aria-hidden="true" />
             </a>
           ))}
         </nav>

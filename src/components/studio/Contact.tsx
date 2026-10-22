@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUp, ArrowUpRight, Check, Copy } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 import { links } from "../../data/portfolio";
+import { routeHref } from "../../lib/routes";
 
-export function Contact() {
-  const { t } = useLanguage();
+export function Contact({ compact = false }: { compact?: boolean }) {
+  const { t, language } = useLanguage();
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">(
     "idle",
   );
@@ -29,7 +30,7 @@ export function Contact() {
     <>
       <section
         id="contact"
-        className="contact-section container section-space"
+        className={`contact-section container section-space${compact ? " contact-compact" : ""}`}
         aria-labelledby="contact-heading"
       >
         <p className="section-label">{t.contactLabel}</p>
@@ -93,14 +94,19 @@ export function Contact() {
         </div>
       </section>
       <footer className="site-footer container">
-        <a className="footer-brand" href="#home" lang="en" dir="ltr">
+        <a
+          className="footer-brand"
+          href={routeHref(language)}
+          lang="en"
+          dir="ltr"
+        >
           ASLAN KARA
         </a>
         <p>{t.footer}</p>
         <span className="copyright">
           © {new Date().getFullYear()} {t.rights}
         </span>
-        <a className="back-to-top" href="#home" aria-label={t.back}>
+        <a className="back-to-top" href="#top" aria-label={t.back}>
           <ArrowUp size={18} aria-hidden="true" />
         </a>
       </footer>

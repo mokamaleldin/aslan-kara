@@ -1,38 +1,64 @@
-# Aslan Kara — portfolio
+# Aslan Kara — professional portfolio
 
-A compact Arabic/English portfolio built with React, TypeScript and Vite.
+Bilingual portfolio built with React, TypeScript and Vite. Arabic uses formal
+copy and the requested Senior Video Editor terminology. Cairo variable fonts
+are self-hosted, including Arabic and Latin subsets.
 
 ```sh
 npm ci
 npm run dev
+npm run build
 ```
 
-`npm run build` checks TypeScript and creates the production site in `dist/`.
-Vercel uses the Vite preset, `npm run build`, and the `dist` output directory.
-No secrets or environment variables are required.
+Vercel uses the Vite preset and `dist` output. No secrets are needed.
 
-## Editing content
+## Pages
 
-- `src/data/copy.ts`: Arabic and English interface copy.
-- `src/data/portfolio.ts`: featured film and selected projects.
-- `src/data/reports.ts`: original publication links and report images.
-- `src/data/courses.ts`: professional development, collapsed by default.
-- `public/cv/`: the supplied Arabic and English CV PDFs.
-- `public/images/work/`: optimized stills from the actual linked videos.
+- `/ar`, `/en`: professional profile, selected work, career, expertise, tools,
+  training and direct contact.
+- `/ar/work`, `/en/work`: the complete project archive with category filters
+  and Arabic/English search.
+- `/ar/work/:project`, `/en/work/:project`: individual project details,
+  contribution, duration/date where verified, media preview and source links.
 
-The homepage shows four selected projects. Category filters show their full
-collection; “View more work” opens the full archive. The main film appears only
-once. Videos load in a native accessible dialog after a visitor clicks play;
-original-source links remain available. Reports open the original publication
-and credit video editing only. Contact links open the visitor’s email or phone
-app. There is no contact delivery backend or simulated success form.
+Legacy `/`, `/work`, `/work/:project`, and `?lang=` links remain supported.
+Language switching preserves the current project, filters and search. Native
+links preserve normal browser navigation and open-in-new-tab behavior.
 
-Language is selected with `?lang=ar` or `?lang=en`, with RTL/LTR layout and optional
-local preference persistence. `/ar` and `/en` are supported by the Vite SPA
-fallback. Keep the canonical/alternate links, sitemap and robots file in sync
-with the public domain if it changes.
+## Content
 
-Thumbnails and video titles were checked against YouTube oEmbed on 22 October
-2026. Dates and durations are shown only where supplied or confirmed. Source
-credits and career figures follow the supplied brief; podcast projects are
-independent, and the Al Jazeera report links are not employment claims.
+- `src/data/copy.ts`: localized interface and professional copy.
+- `src/data/portfolio.ts`: project models, collections and ordering.
+- `src/data/promos.json`: verified playlist IDs, normalized display titles,
+  original source titles and runtimes.
+- `src/data/reports.ts`: report sources and publication dates.
+- `src/data/courses.ts`: the supplied training topics.
+- `public/images/`: authentic profile and portfolio images.
+- `public/fonts/`: Cairo font subsets and OFL license.
+- `public/cv/`: the unchanged supplied CV PDFs.
+
+The public portfolio contains 28 distinct projects and collections: 17 videos
+from the supplied playlist, 5 Al Jazeera Net reports, 4 Behance collections and
+2 independent podcast projects. The music video is available in the archive,
+not featured on the homepage. All cards open project detail pages; video
+players load only after the visitor requests playback.
+
+## Attribution and verified facts
+
+The professional chronology was supplied by the client: Ragab Media
+2017–2021, MK+ 2021–2022, Dawam Medya 2022–present, with independent work
+listed separately. Career figures and podcast scope follow the supplied brief.
+Al Jazeera Net report credits refer to editing the accompanying video, not
+article authorship or employment. Al Jazeera Media Institute is shown as a
+training provider only.
+
+On 22 October 2026 the original YouTube playlist supplied all 17 video IDs,
+titles and runtimes. The public Behance profile supplied the four collection
+titles, covers, URLs and profile photograph. Behance collection detail media
+remain available at their original source; the site does not fabricate embeds.
+Podcast 28 uses its public channel identity. Original video thumbnails and the
+profile photograph are stored locally; only public metadata and media assets
+were retained, without cookies or visitor information.
+
+Keep `public/sitemap.xml` synchronized when adding project IDs. The sitemap
+currently includes all 60 localized home/archive/project routes.

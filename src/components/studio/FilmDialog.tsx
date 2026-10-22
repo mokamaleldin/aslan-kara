@@ -47,7 +47,9 @@ export function FilmDialog({
       <div className="dialog-content">
         <div className="dialog-heading">
           <div>
-            <h2 id="film-dialog-title">{film.title[language]}</h2>
+            <h2 id="film-dialog-title">
+              {(film.videoTitle || film.title)[language]}
+            </h2>
             <p id="film-dialog-role">{film.role[language]}</p>
           </div>
           <button
@@ -63,7 +65,7 @@ export function FilmDialog({
           <iframe
             key={film.youtubeId}
             src={`https://www.youtube-nocookie.com/embed/${film.youtubeId}?autoplay=1&rel=0`}
-            title={film.title[language]}
+            title={(film.videoTitle || film.title)[language]}
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
@@ -71,7 +73,11 @@ export function FilmDialog({
         </div>
         <div className="dialog-bottom">
           <p>{t.videoNote}</p>
-          <a href={film.url} target="_blank" rel="noreferrer">
+          <a
+            href={`https://www.youtube.com/watch?v=${film.youtubeId}`}
+            target="_blank"
+            rel="noreferrer"
+          >
             {t.onYouTube}
             <ArrowUpRight size={16} aria-hidden="true" />
           </a>
