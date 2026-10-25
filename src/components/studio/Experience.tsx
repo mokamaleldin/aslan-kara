@@ -56,7 +56,9 @@ export function Experience() {
               <h3>
                 <bdi>{entry.title}</bdi>
               </h3>
-              <p className="career-role">{entry.role}</p>
+              <p className="career-role">
+                <bdi lang="en">{entry.role}</bdi>
+              </p>
               <p className="career-description">{entry.description}</p>
               {entry.achievement && (
                 <p className="career-achievement">{entry.achievement}</p>

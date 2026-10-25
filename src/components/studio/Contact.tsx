@@ -27,7 +27,7 @@ export function Contact({ compact = false }: { compact?: boolean }) {
     }
   };
   return (
-    <>
+    <div className="contact-panel">
       <section
         id="contact"
         className={`contact-section container section-space${compact ? " contact-compact" : ""}`}
@@ -104,12 +104,12 @@ export function Contact({ compact = false }: { compact?: boolean }) {
         </a>
         <p>{t.footer}</p>
         <span className="copyright">
-          © {new Date().getFullYear()} {t.rights}
+          © {new Date().getFullYear()} <bdi lang="en">{t.rights}</bdi>
         </span>
         <a className="back-to-top" href="#top" aria-label={t.back}>
           <ArrowUp size={18} aria-hidden="true" />
         </a>
       </footer>
-    </>
+    </div>
   );
 }

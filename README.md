@@ -1,7 +1,8 @@
 # Aslan Kara — professional portfolio
 
 Bilingual portfolio built with React, TypeScript and Vite. Arabic uses formal
-copy and the requested Senior Video Editor terminology. Cairo variable fonts
+copy, with “Aslan Kara” and “Senior Video Editor” in English in both locales. The
+visual identity uses deep violet (#1F0062) and warm ivory (#F9ECE5). Cairo variable fonts
 are self-hosted, including Arabic and Latin subsets.
 
 ```sh
@@ -35,13 +36,18 @@ links preserve normal browser navigation and open-in-new-tab behavior.
 - `src/data/courses.ts`: the supplied training topics.
 - `public/images/`: authentic portfolio images.
 - `public/fonts/`: Cairo font subsets and OFL license.
-- `public/cv/`: the unchanged supplied CV PDFs.
+- `public/cv/`: the supplied CV PDFs with the current contact email and mailto links.
 
 The public portfolio contains 28 distinct projects and collections: 17 videos
 from the supplied playlist, 5 Al Jazeera Net reports, 4 Behance collections and
 2 independent podcast projects. The music video is available in the archive,
 not featured on the homepage. All cards open project detail pages; video
-players load only after the visitor requests playback.
+players load only after the visitor requests playback. Large image-led cards keep
+titles and credits outside the image. The archive progressively reveals projects
+in batches, and filtering or searching resets the visible batch.
+
+The contact email is `aslankaraproduction@gmail.com`. The software section includes
+DaVinci Resolve and its Fairlight audio tools alongside the Adobe applications.
 
 ## Attribution and verified facts
 
