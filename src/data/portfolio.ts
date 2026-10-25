@@ -29,7 +29,7 @@ export interface PortfolioWork {
 }
 
 export const links = {
-  email: "abdalmonemkara052017@gmail.com",
+  email: "aslankaraproduction@gmail.com",
   behance: "https://www.behance.net/aslan-kara",
   linkedin: "https://www.linkedin.com/in/aslan-kara-ba425519b",
   promos:

@@ -1,7 +1,7 @@
 export const copy = {
   ar: {
-    name: "أسلان كارا",
-    title: "سنيور فيديو إيديتور",
+    name: "Aslan Kara",
+    title: "Senior Video Editor",
     nav: {
       home: "الرئيسية",
       work: "الأعمال",
@@ -12,7 +12,7 @@ export const copy = {
     menu: "فتح القائمة",
     closeMenu: "إغلاق القائمة",
     eyebrow: "المونتاج التلفزيوني والإنتاج الرقمي",
-    heroLine: "سنيور فيديو إيديتور",
+    heroLine: "Senior Video Editor",
     intro:
       "أعمل في المونتاج التلفزيوني والرقمي منذ عام 2017، بين المؤسسات الإعلامية وشركات الإنتاج والمشروعات المستقلة.",
     introDetail:
@@ -51,6 +51,10 @@ export const copy = {
     clearQuery: "مسح عبارة البحث",
     viewProject: "تفاصيل المشروع",
     collection: "مجموعة أعمال",
+    featuredProject: "مشروع مختار",
+    showMore: "عرض المزيد من الأعمال",
+    showing: "المعروض",
+    of: "من",
     experienceLabel: "المسار المهني",
     experienceHeading: "خبرة متواصلة منذ 2017",
     experienceIntro:
@@ -60,8 +64,8 @@ export const copy = {
     freelanceDate: "تعاونات مستقلة",
     freelanceText:
       "تعاونات مع مؤسسات وجهات إنتاج أخرى، تشمل المونتاج وإنتاج البودكاست ومشروعات إخراج مختارة.",
-    roleEditor: "فيديو إيديتور",
-    currentTitle: "سنيور فيديو إيديتور",
+    roleEditor: "Video Editor",
+    currentTitle: "Senior Video Editor",
     ragab: "رجب ميديا",
     mk: "MK+",
     dawam: "دوام ميديا",
@@ -92,6 +96,8 @@ export const copy = {
     toolImage: "معالجة الصور",
     toolVector: "التصميم المتجهي",
     toolColor: "معالجة الألوان والصور",
+    toolGrading: "المونتاج وتدريج الألوان",
+    toolMixing: "مونتاج الصوت والمكساج",
     coursesLabel: "التطوير المهني",
     coursesHeading: "الدورات والتدريب",
     coursesIntro:
@@ -111,7 +117,7 @@ export const copy = {
     turkey: "إسطنبول، تركيا",
     footer: "المونتاج التلفزيوني والرقمي · إنتاج البودكاست",
     back: "العودة إلى أعلى الصفحة",
-    rights: "أسلان كارا",
+    rights: "Aslan Kara",
     cvAr: "السيرة الذاتية بالعربية",
     cvEn: "السيرة الذاتية بالإنجليزية",
     backWork: "العودة إلى الأعمال",
@@ -138,14 +144,14 @@ export const copy = {
     notFound: "الصفحة غير موجودة",
     returnHome: "العودة إلى الصفحة الرئيسية",
     metadata: {
-      title: "أسلان كارا | سنيور فيديو إيديتور",
+      title: "Aslan Kara | Senior Video Editor",
       description:
-        "الملف المهني لأسلان كارا: المونتاج التلفزيوني والرقمي، البروموهات، التقارير، وإنتاج البودكاست. خبرة مهنية منذ 2017.",
+        "الملف المهني لـ Aslan Kara: المونتاج التلفزيوني والرقمي، البروموهات، التقارير، وإنتاج البودكاست. خبرة مهنية منذ 2017.",
     },
     worksMetadata: {
-      title: "الأعمال والمشروعات | أسلان كارا",
+      title: "الأعمال والمشروعات | Aslan Kara",
       description:
-        "معرض أعمال أسلان كارا في التقارير والبروموهات والبودكاست والموشن جرافيك، مع تفاصيل المساهمة وروابط المشاهدة الأصلية لكل مشروع.",
+        "معرض أعمال Aslan Kara في التقارير والبروموهات والبودكاست والموشن جرافيك، مع تفاصيل المساهمة وروابط المشاهدة الأصلية لكل مشروع.",
     },
   },
   en: {
@@ -200,6 +206,10 @@ export const copy = {
     clearQuery: "Clear search term",
     viewProject: "View project",
     collection: "Collection",
+    featuredProject: "Featured project",
+    showMore: "View more projects",
+    showing: "Showing",
+    of: "of",
     experienceLabel: "Professional experience",
     experienceHeading: "A career in post-production",
     experienceIntro:
@@ -241,6 +251,8 @@ export const copy = {
     toolImage: "Image editing",
     toolVector: "Vector design",
     toolColor: "Color & image processing",
+    toolGrading: "Editing & color grading",
+    toolMixing: "Audio editing & mixing",
     coursesLabel: "Professional development",
     coursesHeading: "Courses & training",
     coursesIntro:

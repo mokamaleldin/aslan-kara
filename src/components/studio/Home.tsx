@@ -17,8 +17,12 @@ export function Home() {
       >
         <div className="profile-title">
           <p className="eyebrow">{t.eyebrow}</p>
-          <h1 id="profile-heading">{t.name}</h1>
-          <p className="professional-title">{t.heroLine}</p>
+          <h1 id="profile-heading">
+            <bdi lang="en">{t.name}</bdi>
+          </h1>
+          <p className="professional-title">
+            <bdi lang="en">{t.heroLine}</bdi>
+          </p>
         </div>
         <div className="profile-main">
           <div className="profile-summary">

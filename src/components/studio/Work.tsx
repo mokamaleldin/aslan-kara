@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Search, X } from "lucide-react";
+import { ArrowDown, Search, X } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 import {
   projects,
@@ -28,6 +28,15 @@ export function Work() {
   const [search, setSearch] = useState(
     () => new URLSearchParams(window.location.search).get("q") || "",
   );
+  const [visibleCount, setVisibleCount] = useState(8);
+  const changeCategory = (next: WorkCategory | "all") => {
+    setCategory(next);
+    setVisibleCount(8);
+  };
+  const changeSearch = (next: string) => {
+    setSearch(next);
+    setVisibleCount(8);
+  };
   useEffect(() => {
     const url = new URL(window.location.href);
     if (category !== "all") url.searchParams.set("category", category);
@@ -48,6 +57,8 @@ export function Work() {
   const params = new URLSearchParams();
   if (category !== "all") params.set("category", category);
   if (search.trim()) params.set("q", search.trim());
+  const showFeatured = !query && category === "all";
+  const visible = filtered.slice(0, visibleCount + (showFeatured ? 1 : 0));
   return (
     <section className="container work-page" aria-labelledby="work-heading">
       <div className="page-intro">
@@ -74,7 +85,7 @@ export function Work() {
           {categories.map((filter) => (
             <button
               key={filter}
-              onClick={() => setCategory(filter)}
+              onClick={() => changeCategory(filter)}
               aria-pressed={category === filter}
             >
               {t.filters[filter]}
@@ -92,37 +103,57 @@ export function Work() {
             aria-label={t.search}
             type="search"
             value={search}
-            onChange={(event) => setSearch(event.target.value)}
+            onChange={(event) => changeSearch(event.target.value)}
             placeholder={t.searchPlaceholder}
           />
           {search && (
-            <button onClick={() => setSearch("")} aria-label={t.clearQuery}>
+            <button onClick={() => changeSearch("")} aria-label={t.clearQuery}>
               <X size={16} aria-hidden="true" />
             </button>
           )}
         </div>
       </div>
       <p className="archive-results" role="status">
-        <bdi>{filtered.length}</bdi> {t.results}
+        <span>
+          <bdi>{filtered.length}</bdi> {t.results}
+        </span>
+        {filtered.length > 0 && (
+          <span>
+            {t.showing} <bdi>{visible.length}</bdi> {t.of}{" "}
+            <bdi>{filtered.length}</bdi>
+          </span>
+        )}
       </p>
-      <div className="project-grid archive-grid">
-        {filtered.map((work, i) => (
+      <div className="project-grid archive-grid" id="project-archive">
+        {visible.map((work, i) => (
           <ProjectCard
             key={work.id}
             work={work}
-            wide={i === 0 && !query && category === "all"}
+            wide={i === 0 && showFeatured}
             search={params.toString()}
           />
         ))}
       </div>
+      {visible.length < filtered.length && (
+        <div className="archive-more">
+          <button
+            className="button button-outline"
+            onClick={() => setVisibleCount((count) => count + 8)}
+            aria-controls="project-archive"
+          >
+            {t.showMore}
+            <ArrowDown size={18} aria-hidden="true" />
+          </button>
+        </div>
+      )}
       {!filtered.length && (
         <div className="empty-results">
           <p>{t.noResults}</p>
           <button
             className="button button-outline"
             onClick={() => {
-              setCategory("all");
-              setSearch("");
+              changeCategory("all");
+              changeSearch("");
             }}
           >
             {t.clearSearch}
