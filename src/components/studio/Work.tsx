@@ -115,7 +115,7 @@ export function Work() {
       </div>
       <p className="archive-results" role="status">
         <span>
-          <bdi>{filtered.length}</bdi> {t.results}
+          {t.results}: <bdi>{filtered.length}</bdi>
         </span>
         {filtered.length > 0 && (
           <span>

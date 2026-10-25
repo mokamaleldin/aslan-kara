@@ -20,6 +20,20 @@ function Portfolio() {
   const isWork = path === "/work";
   const notFound = !isHome && !isWork && !project;
   useEffect(() => {
+    const targetId = window.location.hash.slice(1);
+    if (!targetId) return;
+    let cancelled = false;
+    void document.fonts.ready.then(() => {
+      if (!cancelled)
+        document
+          .getElementById(targetId)
+          ?.scrollIntoView({ behavior: "instant" });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  useEffect(() => {
     const metadata = isWork ? t.worksMetadata : t.metadata;
     const title = project
       ? `${project.title[language]} | ${t.name}`
