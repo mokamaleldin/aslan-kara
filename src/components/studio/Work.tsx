@@ -65,10 +65,6 @@ export function Work() {
         <p className="section-label">{t.workLabel}</p>
         <div className="work-page-title">
           <h1 id="work-heading">{t.workHeading}</h1>
-          <span className="archive-number" dir="ltr">
-            {projects.length}
-            <span>{language === "ar" ? "الأعمال" : "PROJECTS"}</span>
-          </span>
         </div>
         <p>{t.workIntro}</p>
       </div>
@@ -89,11 +85,6 @@ export function Work() {
               aria-pressed={category === filter}
             >
               {t.filters[filter]}
-              <span dir="ltr">
-                {filter === "all"
-                  ? projects.length
-                  : projects.filter((work) => work.category === filter).length}
-              </span>
             </button>
           ))}
         </div>
@@ -113,16 +104,9 @@ export function Work() {
           )}
         </div>
       </div>
-      <p className="archive-results" role="status">
-        <span>
-          {t.results}: <bdi>{filtered.length}</bdi>
-        </span>
-        {filtered.length > 0 && (
-          <span>
-            {t.showing} <bdi>{visible.length}</bdi> {t.of}{" "}
-            <bdi>{filtered.length}</bdi>
-          </span>
-        )}
+      <p className="sr-only" role="status">
+        {t.filters[category]}
+        {search.trim() ? `: ${search.trim()}` : ""}
       </p>
       <div className="project-grid archive-grid" id="project-archive">
         {visible.map((work, i) => (

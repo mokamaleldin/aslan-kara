@@ -45,7 +45,6 @@ export const copy = {
     },
     search: "ابحث في الأعمال",
     searchPlaceholder: "اسم المشروع أو نوع العمل",
-    results: "الأعمال والمجموعات",
     noResults: "لا توجد أعمال مطابقة لهذا البحث.",
     clearSearch: "إعادة ضبط البحث",
     clearQuery: "مسح عبارة البحث",
@@ -53,8 +52,6 @@ export const copy = {
     collection: "مجموعة أعمال",
     featuredProject: "مشروع مختار",
     showMore: "عرض المزيد من الأعمال",
-    showing: "المعروض",
-    of: "من",
     experienceLabel: "المسار المهني",
     experienceHeading: "خبرة متواصلة منذ 2017",
     experienceIntro:
@@ -200,7 +197,6 @@ export const copy = {
     },
     search: "Search the portfolio",
     searchPlaceholder: "Project name or category",
-    results: "Projects & collections",
     noResults: "No projects match your search.",
     clearSearch: "Reset search",
     clearQuery: "Clear search term",
@@ -208,8 +204,6 @@ export const copy = {
     collection: "Collection",
     featuredProject: "Featured project",
     showMore: "View more projects",
-    showing: "Showing",
-    of: "of",
     experienceLabel: "Professional experience",
     experienceHeading: "A career in post-production",
     experienceIntro:

@@ -1,6 +1,6 @@
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
-import { homeSelectedWork, projects } from "../../data/portfolio";
+import { homeSelectedWork } from "../../data/portfolio";
 import { routeHref } from "../../lib/routes";
 import { ProjectCard } from "./ProjectCard";
 import { Experience } from "./Experience";
@@ -80,9 +80,6 @@ export function Home() {
           </div>
           <a href={routeHref(language, "/work")} className="text-link">
             {t.allWork}
-            <span className="count-badge" dir="ltr">
-              {projects.length}
-            </span>
             <ArrowUpRight size={17} aria-hidden="true" />
           </a>
         </div>

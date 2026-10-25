@@ -36,7 +36,11 @@ links preserve normal browser navigation and open-in-new-tab behavior.
 - `src/data/courses.ts`: the supplied training topics.
 - `public/images/`: authentic portfolio images.
 - `public/fonts/`: Cairo font subsets and OFL license.
-- `public/cv/`: the supplied CV PDFs with the current contact email and mailto links.
+- `public/cv/`: the bilingual two-page CVs with English identity, the supplied career
+  timeline, current contact email and clickable portfolio/mailto links.
+- `scripts/build_cvs.py`: reproducible CV generation with PyMuPDF's Arabic-aware
+  HTML layout. Run `python scripts/build_cvs.py` with PyMuPDF installed; optionally
+  pass `--preview-dir /path/to/previews` to render every saved PDF page for review.
 
 The public portfolio contains 28 distinct projects and collections: 17 videos
 from the supplied playlist, 5 Al Jazeera Net reports, 4 Behance collections and
@@ -45,6 +49,9 @@ not featured on the homepage. All cards open project detail pages; video
 players load only after the visitor requests playback. Large image-led cards keep
 titles and credits outside the image. The archive progressively reveals projects
 in batches, and filtering or searching resets the visible batch.
+Project totals, category counts and pagination totals are intentionally hidden
+from the public interface. Project titles, publication dates and runtimes remain
+part of the original work metadata.
 
 The contact email is `aslankaraproduction@gmail.com`. The software section includes
 DaVinci Resolve and its Fairlight audio tools alongside the Adobe applications.
